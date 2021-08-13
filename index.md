@@ -37,7 +37,7 @@ for(var i = 0; i < examples.length; i++) {
 
    }
 </script>
-
+# Getting Started with Z3: A Guide
 <p style="clear:both;">Be sure to follow along with the examples by clicking the "edit" link in the
    corner. See what the tool says, try your own formulas, and experiment!</p>
    
@@ -85,9 +85,9 @@ for(var i = 0; i < examples.length; i++) {
    receives an integer and a boolean, and returns an integer.
    </p>
    <textarea id="ex1_code" rows="3" style="width:100%">
-      (echo "starting Z3...")
-      (declare-const a Int)
-      (declare-fun f (Int Bool) Int)
+(echo "starting Z3...")
+(declare-const a Int)
+(declare-fun f (Int Bool) Int)
    </textarea><br/>
    <button onClick="run_id('ex1_code','ex1_result')" >Solve</button> <br/>
    <code id="ex1_result" ></code>
@@ -99,11 +99,11 @@ for(var i = 0; i < examples.length; i++) {
    that makes all asserted formulas true.
    </p>
    <textarea id="ex2_code" rows="20" style="width:100%">
-      (declare-const a Int)
-      (declare-fun f (Int Bool) Int)
-      (assert (> a 10))
-      (assert (< (f a true) 100))
-      (check-sat)
+(declare-const a Int)
+(declare-fun f (Int Bool) Int)
+(assert (> a 10))
+(assert (< (f a true) 100))
+(check-sat)
    </textarea><br/>
    <button onClick="run_id('ex2_code','ex2_result')" >Solve</button> <br/>
    <code id="ex2_result" ></code>
@@ -123,12 +123,12 @@ for(var i = 0; i < examples.length; i++) {
    an interpretation that makes all formulas on the Z3 internal stack true.
    </p> 
    <textarea id="ex3_code" rows="20" style="width:100%">
-      (declare-const a Int)
-      (declare-fun f (Int Bool) Int)
-      (assert (&gt; a 10))
-      (assert (&lt; (f a true) 100))
-      (check-sat)
-      (get-model)
+(declare-const a Int)
+(declare-fun f (Int Bool) Int)
+(assert (&gt; a 10))
+(assert (&lt; (f a true) 100))
+(check-sat)
+(get-model)
    </textarea><br/>
    <button onClick="run_id('ex3_code','ex3_result')" >Solve</button> <br/>
    <code id="ex3_result" ></code>
@@ -175,21 +175,21 @@ for(var i = 0; i < examples.length; i++) {
    removed the declaration for <tt>p</tt>. If the last <tt>pop</tt> command is removed, then the error is corrected.
    </p>
    <textarea id="ex4_code" rows="20" style="width:100%">
-      (declare-const x Int)
-      (declare-const y Int)
-      (declare-const z Int)
-      (push)
-      (assert (= (+ x y) 10))
-      (assert (= (+ x (* 2 y)) 20))
-      (check-sat)
-      (pop) ; remove the two assertions
-      (push) 
-      (assert (= (+ (* 3 x) y) 10))
-      (assert (= (+ (* 2 x) (* 2 y)) 21))
-      (check-sat)
-      (declare-const p Bool)
-      (pop)
-      (assert p) ; error, since declaration of p was removed from the stack   
+(declare-const x Int)
+(declare-const y Int)
+(declare-const z Int)
+(push)
+(assert (= (+ x y) 10))
+(assert (= (+ x (* 2 y)) 20))
+(check-sat)
+(pop) ; remove the two assertions
+(push) 
+(assert (= (+ (* 3 x) y) 10))
+(assert (= (+ (* 2 x) (* 2 y)) 21))
+(check-sat)
+(declare-const p Bool)
+(pop)
+(assert p) ; error, since declaration of p was removed from the stack   
    </textarea><br/>
    <button onClick="run_id('ex4_code','ex4_result')" >Solve</button> <br/>
    <code id="ex4_result" ></code>
@@ -231,20 +231,20 @@ for(var i = 0; i < examples.length; i++) {
    This command accepts many different options, <tt>(help simplify)</tt> will display all available options.
    </p>
    <textarea id="ex6_code" rows="20" style="width:100%">
-      (declare-const a (Array Int Int))
-      (declare-const x Int)
-      (declare-const y Int)
-      (display (+ x 2 x 1))
-      (simplify (+ x 2 x 1))
-      (simplify (* (+ x y) (+ x y)))
-      (simplify (* (+ x y) (+ x y)) :som true) ; put all expressions in sum-of-monomials form.
-      (simplify (= x (+ y 2)) :arith-lhs true)
-      (simplify (= (store (store a 1 2) 4 3)
-                   (store (store a 4 3) 1 2)))
-      (simplify (= (store (store a 1 2) 4 3)
-                   (store (store a 4 3) 1 2))
-                :sort-store true)
-      (help simplify)
+(declare-const a (Array Int Int))
+(declare-const x Int)
+(declare-const y Int)
+(display (+ x 2 x 1))
+(simplify (+ x 2 x 1))
+(simplify (* (+ x y) (+ x y)))
+(simplify (* (+ x y) (+ x y)) :som true) ; put all expressions in sum-of-monomials form.
+(simplify (= x (+ y 2)) :arith-lhs true)
+(simplify (= (store (store a 1 2) 4 3)
+               (store (store a 4 3) 1 2)))
+(simplify (= (store (store a 1 2) 4 3)
+               (store (store a 4 3) 1 2))
+            :sort-store true)
+(help simplify)
    </textarea><br/>
    <button onClick="run_id('ex6_code','ex6_result')" >Solve</button> <br/>
    <code id="ex6_result" ></code>
@@ -264,20 +264,21 @@ for(var i = 0; i < examples.length; i++) {
    The following example defines several abbreviations for sort expressions.
    </p>
    <textarea id="ex7_code" rows="20" style="width:100%">
-      ;(define-sort Set (T) (Array T Bool))
-      ;(define-sort IList () (List Int))
-      ;(define-sort List-Set (T) (Array (List T) Bool))
-      (define-sort I () Int)
-      
-      (declare-const s1 (Set I))
-      ;(declare-const s2 (List-Set Int))
-      (declare-const a I)
-      ;(declare-const l IList)
-      
-      (assert (= (select s1 a) true))
-      ;(assert (= (select s2 l) false))
-      (check-sat)
-      (get-model)
+; This example needs to be rewritten on modern Z3
+;(define-sort Set (T) (Array T Bool))
+;(define-sort IList () (List Int))
+;(define-sort List-Set (T) (Array (List T) Bool))
+(define-sort I () Int)
+
+(declare-const s1 (Set I))
+;(declare-const s2 (List-Set Int))
+(declare-const a I)
+;(declare-const l IList)
+
+(assert (= (select s1 a) true))
+;(assert (= (select s2 l) false))
+(check-sat)
+(get-model)
    </textarea><br/>
    <button onClick="run_id('ex7_code','ex7_result')" >Solve</button> <br/>
    <code id="ex7_result" ></code>
@@ -293,14 +294,14 @@ for(var i = 0; i < examples.length; i++) {
    In this example, <tt>conjecture</tt> is an alias for the conjecture we want to prove.
    </p>
    <textarea id="ex8_code" rows="20" style="width:100%">
-      (declare-const p Bool)
-      (declare-const q Bool)
-      (declare-const r Bool)
-      (define-fun conjecture () Bool
-         (=&gt; (and (=&gt; p q) (=&gt; q r))
-            (=&gt; p r)))
-      (assert (not conjecture))
-      (check-sat)
+(declare-const p Bool)
+(declare-const q Bool)
+(declare-const r Bool)
+(define-fun conjecture () Bool
+   (=&gt; (and (=&gt; p q) (=&gt; q r))
+      (=&gt; p r)))
+(assert (not conjecture))
+(check-sat)
    </textarea><br/>
    <button onClick="run_id('ex8_code','ex8_result')" >Solve</button> <br/>
    <code id="ex8_result" ></code>
@@ -325,12 +326,12 @@ for(var i = 0; i < examples.length; i++) {
    formula <tt>F</tt> is valid, we ask Z3 whether <tt>not F</tt> is satisfiable. 
    Thus, to check the deMorgan's law is valid (i.e., to prove it), we show its negation to be unsatisfiable.</p>
    <textarea id="ex9_code" rows="20" style="width:100%">
-      (declare-const a Bool)
-      (declare-const b Bool)
-      (define-fun demorgan () Bool
-          (= (and a b) (not (or (not a) (not b)))))
-      (assert (not demorgan))
-      (check-sat)
+(declare-const a Bool)
+(declare-const b Bool)
+(define-fun demorgan () Bool
+      (= (and a b) (not (or (not a) (not b)))))
+(assert (not demorgan))
+(check-sat)
    </textarea><br/>
    <button onClick="run_id('ex9_code','ex9_result')" >Solve</button> <br/>
    <code id="ex9_result" ></code>
@@ -345,14 +346,14 @@ for(var i = 0; i < examples.length; i++) {
    So everything is really just a function.
    </p>
    <textarea id="ex10_code" rows="20" style="width:100%">
-      (declare-fun f (Int) Int)
-      (declare-fun a () Int) ; a is a constant
-      (declare-const b Int) ; syntax sugar for (declare-fun b () Int)
-      (assert (&gt; a 20))
-      (assert (&gt; b a))
-      (assert (= (f 10) 1))
-      (check-sat)
-      (get-model)
+(declare-fun f (Int) Int)
+(declare-fun a () Int) ; a is a constant
+(declare-const b Int) ; syntax sugar for (declare-fun b () Int)
+(assert (&gt; a 20))
+(assert (&gt; b a))
+(assert (= (f 10) 1))
+(check-sat)
+(get-model)
    </textarea><br/>
    <button onClick="run_id('ex10_code','ex10_result')" >Solve</button> <br/>
    <code id="ex10_result" ></code>
@@ -382,15 +383,15 @@ for(var i = 0; i < examples.length; i++) {
    </p>
    
    <textarea id="ex11_code" rows="20" style="width:100%">
-      (declare-sort A)
-      (declare-const x A)
-      (declare-const y A)
-      (declare-fun f (A) A)
-      (assert (= (f (f x)) x))
-      (assert (= (f x) y))
-      (assert (not (= x y)))
-      (check-sat)
-      (get-model)
+(declare-sort A)
+(declare-const x A)
+(declare-const y A)
+(declare-fun f (A) A)
+(assert (= (f (f x)) x))
+(assert (= (f x) y))
+(assert (not (= x y)))
+(check-sat)
+(get-model)
    </textarea><br/>
    <button onClick="run_id('ex11_code','ex11_result')" >Solve</button> <br/>
    <code id="ex11_result" ></code>
@@ -428,17 +429,17 @@ for(var i = 0; i < examples.length; i++) {
    The command <b>get-model</b> displays the model built by Z3.
    </p>
    <textarea id="ex12_code" rows="20" style="width:100%">
-      (declare-const a Int)
-      (declare-const b Int)
-      (declare-const c Int)
-      (declare-const d Real)
-      (declare-const e Real)
-      (assert (&gt; a (+ b 2)))
-      (assert (= a (+ (* 2 c) 10)))
-      (assert (&lt;= (+ c b) 1000))
-      (assert (&gt;= d e))
-      (check-sat)
-      (get-model)
+(declare-const a Int)
+(declare-const b Int)
+(declare-const c Int)
+(declare-const d Real)
+(declare-const e Real)
+(assert (&gt; a (+ b 2)))
+(assert (= a (+ (* 2 c) 10)))
+(assert (&lt;= (+ c b) 1000))
+(assert (&gt;= d e))
+(check-sat)
+(get-model)
    </textarea><br/>
    <button onClick="run_id('ex12_code','ex12_result')" >Solve</button> <br/>
    <code id="ex12_result" ></code>
@@ -450,16 +451,16 @@ for(var i = 0; i < examples.length; i++) {
    expression into a real one.
    </p>
    <textarea id="ex13_code" rows="20" style="width:100%">
-      (declare-const a Int)
-      (declare-const b Int)
-      (declare-const c Int)
-      (declare-const d Real)
-      (declare-const e Real)
-      (assert (&gt; e (+ (to_real (+ a b)) 2.0)))
-      (assert (= d (+ (to_real c) 0.5)))
-      (assert (&gt; a b))
-      (check-sat)
-      (get-model)
+(declare-const a Int)
+(declare-const b Int)
+(declare-const c Int)
+(declare-const d Real)
+(declare-const e Real)
+(assert (&gt; e (+ (to_real (+ a b)) 2.0)))
+(assert (= d (+ (to_real c) 0.5)))
+(assert (&gt; a b))
+(check-sat)
+(get-model)
    </textarea><br/>
    <button onClick="run_id('ex13_code','ex13_result')" >Solve</button> <br/>
    <code id="ex13_result" ></code>
@@ -479,33 +480,33 @@ for(var i = 0; i < examples.length; i++) {
    a nonlinear integer arithmetic formula that it will fail produce an answer.
    </p>
    <textarea id="ex14_code" rows="20" style="width:100%">
-      (declare-const a Int)
-      (assert (&gt; (* a a) 3))
-      (check-sat)
-      (get-model)
-      
-      (echo "Z3 does not always find solutions to non-linear problems")
-      (declare-const b Real)
-      (declare-const c Real)
-      (assert (= (+ (* b b b) (* b c)) 3.0))
-      (check-sat)
-      
-      (echo "yet it can show unsatisfiabiltiy for some nontrivial nonlinear problems...")
-      (declare-const x Real)
-      (declare-const y Real)
-      (declare-const z Real)
-      (assert (= (* x x) (+ x 2.0)))
-      (assert (= (* x y) x))
-      (assert (= (* (- y 1.0) z) 1.0))
-      (check-sat)
-      
-      (reset)
-      (echo "When presented only non-linear constraints over reals, Z3 uses a specialized complete solver")
-      (declare-const b Real)
-      (declare-const c Real)
-      (assert (= (+ (* b b b) (* b c)) 3.0))
-      (check-sat)
-      (get-model)
+(declare-const a Int)
+(assert (&gt; (* a a) 3))
+(check-sat)
+(get-model)
+
+(echo "Z3 does not always find solutions to non-linear problems")
+(declare-const b Real)
+(declare-const c Real)
+(assert (= (+ (* b b b) (* b c)) 3.0))
+(check-sat)
+
+(echo "yet it can show unsatisfiabiltiy for some nontrivial nonlinear problems...")
+(declare-const x Real)
+(declare-const y Real)
+(declare-const z Real)
+(assert (= (* x x) (+ x 2.0)))
+(assert (= (* x y) x))
+(assert (= (* (- y 1.0) z) 1.0))
+(check-sat)
+
+(reset)
+(echo "When presented only non-linear constraints over reals, Z3 uses a specialized complete solver")
+(declare-const b Real)
+(declare-const c Real)
+(assert (= (+ (* b b b) (* b c)) 3.0))
+(check-sat)
+(get-model)
    </textarea><br/>
    <button onClick="run_id('ex14_code','ex14_result')" >Solve</button> <br/>
    <code id="ex14_result" ></code>
@@ -517,26 +518,26 @@ for(var i = 0; i < examples.length; i++) {
    Internally, they are all mapped to multiplication.  
    </p>
    <textarea id="ex15_code" rows="3" style="width:100%">
-   (declare-const a Int)
-   (declare-const r1 Int)
-   (declare-const r2 Int)
-   (declare-const r3 Int)
-   (declare-const r4 Int)
-   (declare-const r5 Int)
-   (declare-const r6 Int)
-   (assert (= a 10))
-   (assert (= r1 (div a 4))) ; integer division
-   (assert (= r2 (mod a 4))) ; mod
-   (assert (= r3 (rem a 4))) ; remainder
-   (assert (= r4 (div a (- 4)))) ; integer division
-   (assert (= r5 (mod a (- 4)))) ; mod
-   (assert (= r6 (rem a (- 4)))) ; remainder
-   (declare-const b Real)
-   (declare-const c Real)
-   (assert (&gt;= b (/ c 3.0)))
-   (assert (&gt;= c 20.0))
-   (check-sat)
-   (get-model)
+(declare-const a Int)
+(declare-const r1 Int)
+(declare-const r2 Int)
+(declare-const r3 Int)
+(declare-const r4 Int)
+(declare-const r5 Int)
+(declare-const r6 Int)
+(assert (= a 10))
+(assert (= r1 (div a 4))) ; integer division
+(assert (= r2 (mod a 4))) ; mod
+(assert (= r3 (rem a 4))) ; remainder
+(assert (= r4 (div a (- 4)))) ; integer division
+(assert (= r5 (mod a (- 4)))) ; mod
+(assert (= r6 (rem a (- 4)))) ; remainder
+(declare-const b Real)
+(declare-const c Real)
+(assert (&gt;= b (/ c 3.0)))
+(assert (&gt;= c 20.0))
+(check-sat)
+(get-model)
    </textarea><br/>
    <button id="ex15" onClick="run_id('ex15_code','ex15_result')" >Solve</button> <br/>
    <code id="ex15_result" ></code>
@@ -571,16 +572,16 @@ for(var i = 0; i < examples.length; i++) {
    This is essentially a macro, and Z3 will expand its definition for every application of <b>mydiv</b>. 
    </p>
    <textarea id="ex17_code" rows="3" style="width:100%">
-   ; defining my own division operator where x/0.0 == 0.0 for every x.
-   (define-fun mydiv ((x Real) (y Real)) Real
-     (if (not (= y 0.0))
-         (/ x y)
-         0.0))
-   (declare-const a Real)
-   (declare-const b Real)
-   (assert (&gt;= (mydiv a b) 1.0))
-   (assert (= b 0.0))
-   (check-sat)
+; defining my own division operator where x/0.0 == 0.0 for every x.
+(define-fun mydiv ((x Real) (y Real)) Real
+   (if (not (= y 0.0))
+      (/ x y)
+      0.0))
+(declare-const a Real)
+(declare-const b Real)
+(assert (&gt;= (mydiv a b) 1.0))
+(assert (= b 0.0))
+(check-sat)
    </textarea><br/>
    <button onClick="run_id('ex17_code','ex17_result')" >Solve</button> <br/>
    <code id="ex17_result" ></code>
@@ -622,15 +623,15 @@ for(var i = 0; i < examples.length; i++) {
    decimal format.
    </p>
    <textarea id="ex18_code" rows="3" style="width:100%">
-   (display #b0100)
-   (display (_ bv20 8))
-   (display (_ bv20 7))
-   (display #x0a) 
-   (set-option :pp.bv-literals false)
-   (display #b0100)
-   (display (_ bv20 8))
-   (display (_ bv20 7))
-   (display #x0a) 
+(display #b0100)
+(display (_ bv20 8))
+(display (_ bv20 7))
+(display #x0a) 
+(set-option :pp.bv-literals false)
+(display #b0100)
+(display (_ bv20 8))
+(display (_ bv20 7))
+(display #x0a) 
    </textarea><br/>
    <button onClick="run_id('ex18_code','ex18_result')" >Solve</button> <br/>
    <code id="ex18_result" ></code>
@@ -638,17 +639,16 @@ for(var i = 0; i < examples.length; i++) {
    
    <h3>Basic Bitvector Arithmetic</h3>
    <textarea id="ex19_code" rows="3" style="width:100%">
-   (simplify (bvadd #x07 #x03)) ; addition
-   (simplify (bvsub #x07 #x03)) ; subtraction
-   (simplify (bvneg #x07)) ; unary minus
-   (simplify (bvmul #x07 #x03)) ; multiplication
-   (simplify (bvurem #x07 #x03)) ; unsigned remainder
-   (simplify (bvsrem #x07 #x03)) ; signed remainder
-   (simplify (bvsmod #x07 #x03)) ; signed modulo
-   (simplify (bvshl #x07 #x03)) ; shift left
-   (simplify (bvlshr #xf0 #x03)) ; unsigned (logical) shift right
-   (simplify (bvashr #xf0 #x03)) ; signed (arithmetical) shift right
-   
+(simplify (bvadd #x07 #x03)) ; addition
+(simplify (bvsub #x07 #x03)) ; subtraction
+(simplify (bvneg #x07)) ; unary minus
+(simplify (bvmul #x07 #x03)) ; multiplication
+(simplify (bvurem #x07 #x03)) ; unsigned remainder
+(simplify (bvsrem #x07 #x03)) ; signed remainder
+(simplify (bvsmod #x07 #x03)) ; signed modulo
+(simplify (bvshl #x07 #x03)) ; shift left
+(simplify (bvlshr #xf0 #x03)) ; unsigned (logical) shift right
+(simplify (bvashr #xf0 #x03)) ; signed (arithmetical) shift right
    </textarea><br/>
    <button onClick="run_id('ex19_code','ex19_result')" >Solve</button> <br/>
    <code id="ex19_result" ></code>
@@ -656,12 +656,12 @@ for(var i = 0; i < examples.length; i++) {
    
    <h3>Bitwise Operations</h3>
    <textarea id="ex20_code" rows="3" style="width:100%">
-   (simplify (bvor #x6 #x3))   ; bitwise or
-   (simplify (bvand #x6 #x3))  ; bitwise and
-   (simplify (bvnot #x6)) ; bitwise not
-   (simplify (bvnand #x6 #x3)) ; bitwise nand
-   (simplify (bvnor #x6 #x3)) ; bitwise nor
-   (simplify (bvxnor #x6 #x3)) ; bitwise xnor
+(simplify (bvor #x6 #x3))   ; bitwise or
+(simplify (bvand #x6 #x3))  ; bitwise and
+(simplify (bvnot #x6)) ; bitwise not
+(simplify (bvnand #x6 #x3)) ; bitwise nand
+(simplify (bvnor #x6 #x3)) ; bitwise nor
+(simplify (bvxnor #x6 #x3)) ; bitwise xnor
    </textarea><br/>
    <button onClick="run_id('ex20_code','ex20_result')" >Solve</button> <br/>
    <code id="ex20_result" ></code>
@@ -673,10 +673,10 @@ for(var i = 0; i < examples.length; i++) {
    We can prove a bitwise version of deMorgan's law:
    </p>
    <textarea id="ex21_code" rows="3" style="width:100%">
-   (declare-const x (_ BitVec 64))
-   (declare-const y (_ BitVec 64))
-   (assert (not (= (bvand (bvnot x) (bvnot y)) (bvnot (bvor x y)))))
-   (check-sat)
+(declare-const x (_ BitVec 64))
+(declare-const y (_ BitVec 64))
+(assert (not (= (bvand (bvnot x) (bvnot y)) (bvnot (bvor x y)))))
+(check-sat)
    </textarea><br/>
    <button onClick="run_id('ex21_code','ex21_result')" >Solve</button> <br/>
    <code id="ex21_result" ></code>
@@ -690,31 +690,31 @@ for(var i = 0; i < examples.length; i++) {
    We check this for four bits below.
    </p>
    <textarea id="ex22_code" rows="3" style="width:100%">
-      (define-fun is-power-of-two ((x (_ BitVec 4))) Bool 
-     (= #x0 (bvand x (bvsub x #x1))))
-   (declare-const a (_ BitVec 4))
-   (assert 
-    (not (= (is-power-of-two a) 
-            (or (= a #x0) 
-                (= a #x1) 
-                (= a #x2) 
-                (= a #x4) 
-                (= a #x8)))))
-   (check-sat)
+(define-fun is-power-of-two ((x (_ BitVec 4))) Bool 
+   (= #x0 (bvand x (bvsub x #x1))))
+(declare-const a (_ BitVec 4))
+(assert 
+   (not (= (is-power-of-two a) 
+         (or (= a #x0) 
+               (= a #x1) 
+               (= a #x2) 
+               (= a #x4) 
+               (= a #x8)))))
+(check-sat)
    </textarea><br/>
    <button onClick="run_id('ex22_code','ex22_result')" >Solve</button> <br/>
    <code id="ex22_result" ></code>
    
    <h3>Predicates over Bitvectors</h3>
    <textarea id="ex23_code" rows="3" style="width:100%">
-   (simplify (bvule #x0a #xf0))  ; unsigned less or equal
-   (simplify (bvult #x0a #xf0))  ; unsigned less than
-   (simplify (bvuge #x0a #xf0))  ; unsigned greater or equal
-   (simplify (bvugt #x0a #xf0))  ; unsigned greater than
-   (simplify (bvsle #x0a #xf0))  ; signed less or equal
-   (simplify (bvslt #x0a #xf0))  ; signed less than
-   (simplify (bvsge #x0a #xf0))  ; signed greater or equal
-   (simplify (bvsgt #x0a #xf0))  ; signed greater than
+(simplify (bvule #x0a #xf0))  ; unsigned less or equal
+(simplify (bvult #x0a #xf0))  ; unsigned less than
+(simplify (bvuge #x0a #xf0))  ; unsigned greater or equal
+(simplify (bvugt #x0a #xf0))  ; unsigned greater than
+(simplify (bvsle #x0a #xf0))  ; signed less or equal
+(simplify (bvslt #x0a #xf0))  ; signed less than
+(simplify (bvsge #x0a #xf0))  ; signed greater or equal
+(simplify (bvsgt #x0a #xf0))  ; signed greater than
    </textarea><br/>
    <button onClick="run_id('ex23_code','ex23_result')" >Solve</button> <br/>
    <code id="ex23_result" ></code>
@@ -724,11 +724,11 @@ for(var i = 0; i < examples.length; i++) {
    </p>
    
    <textarea id="ex24_code" rows="3" style="width:100%">
-   (declare-const a (_ BitVec 4))
-   (declare-const b (_ BitVec 4))
-   (assert (not (= (bvule a b) (bvsle a b))))
-   (check-sat)
-   (get-model)
+(declare-const a (_ BitVec 4))
+(declare-const b (_ BitVec 4))
+(assert (not (= (bvule a b) (bvsle a b))))
+(check-sat)
+(get-model)
    </textarea><br/>
    <button onClick="run_id('ex24_code','ex24_result')" >Solve</button> <br/>
    <code id="ex24_result" ></code>
@@ -771,16 +771,16 @@ for(var i = 0; i < examples.length; i++) {
    We can check this constraint.
    </p>
    <textarea id="ex25_code" rows="3" style="width:100%">
-   (declare-const x Int)
-   (declare-const y Int)
-   (declare-const z Int)
-   (declare-const a1 (Array Int Int))
-   (declare-const a2 (Array Int Int))
-   (declare-const a3 (Array Int Int))
-   (assert (= (select a1 x) x))
-   (assert (= (store a1 x y) a1))
-   (check-sat)
-   (get-model)
+(declare-const x Int)
+(declare-const y Int)
+(declare-const z Int)
+(declare-const a1 (Array Int Int))
+(declare-const a2 (Array Int Int))
+(declare-const a3 (Array Int Int))
+(assert (= (select a1 x) x))
+(assert (= (store a1 x y) a1))
+(check-sat)
+(get-model)
    </textarea><br/>
    <button onClick="run_id('ex25_code','ex25_result')" >Solve</button> <br/>
    <code id="ex25_result" ></code>
@@ -790,19 +790,19 @@ for(var i = 0; i < examples.length; i++) {
    <tt>(not (= x y))</tt>.
    </p>
    <textarea id="ex26_code" rows="3" style="width:100%">
-   (declare-const x Int)
-   (declare-const y Int)
-   (declare-const z Int)
-   (declare-const a1 (Array Int Int))
-   (declare-const a2 (Array Int Int))
-   (declare-const a3 (Array Int Int))
-   (assert (= (select a1 x) x))
-   (assert (= (store a1 x y) a1))
-   (assert (not (= x y)))
-   (check-sat)
+(declare-const x Int)
+(declare-const y Int)
+(declare-const z Int)
+(declare-const a1 (Array Int Int))
+(declare-const a2 (Array Int Int))
+(declare-const a3 (Array Int Int))
+(assert (= (select a1 x) x))
+(assert (= (store a1 x y) a1))
+(assert (not (= x y)))
+(check-sat)
    </textarea><br/>
    <button onClick="run_id('ex26_code','ex26_result')" >Solve</button> <br/>
-   <code id="ex22_result" ></code>
+   <code id="ex26_result" ></code>
 
    
    <h3>Constant Arrays</h3>
