@@ -13,23 +13,47 @@ layout: default
 
    window.onload = function(){
 
+// Grab all pre elements and replace them with textarea button results combo
+var examples = document.getElementsByTagName("pre");
+console.log(examples)
+examples = Array.from(examples)
+for (let code of examples) {
+   let div = document.createElement("div");
 
-var examples = document.getElementsByClassName("listinglink");
-/*
-for(var i = 0; i < examples.length; i++) {
-    var code = examples[i].nextSibling;
-    console.log(typeof(code))
-    console.log(JSON.stringify(code));
-    console.log(code.textContent)
-    console.log(examples[i])
-  var ta = document.createElement("textarea");
+  let ta = document.createElement("textarea");
+  let result = document.createElement("code");
+
+  let button = document.createElement("button");
+  let br = document.createElement("br");
+
   ta.style.width = "100%";
-  ta.innerText = code.textContent;
-  examples[i].parentNode.insertBefore(ta, examples[i]);
-  // document.body.insertBefore(ta, examples[i]);
+  ta.innerHTML = code.textContent.replace(/\r?\n/g, '\r\n');
+  //code.parentNode.replaceChild(ta, code);
+  button.innerText = "Solve"
+  button.onclick = () => {
+     let res = Z3.solve(ta.value);
+     console.log(res)
+      result.innerText = res; 
+  }
+  div.appendChild(ta);
+  div.appendChild(button);
+  div.appendChild(br);
+  div.appendChild(result);
+    code.parentNode.replaceChild(div, code);
+}
 
-   }
-*/
+   // destroy aref that do nothing now
+   var badlinks = document.getElementsByTagName('a');
+   for(var i = 0; i < badlinks.length; i++) {
+      link = badlinks[i]
+      if(link.innerHTML == "load in editor"){
+         link.innerHTML = ""
+         //link.remove()
+
+      }
+}
+   
+   // resize rows of all textarea to fits code 
    var inputs = document.getElementsByTagName('textarea');
    for(var i = 0; i < inputs.length; i++) {
       inputs[i].rows = inputs[i].value.split(/\r\n|\r|\n/).length - 1
@@ -207,7 +231,8 @@ for(var i = 0; i < examples.length; i++) {
    configuration options can be set.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/0nSM?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/0nSM?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (set-option :print-success true) 
    (set-option :produce-unsat-cores true) ; enable generation of unsat cores
    (set-option :produce-models true) ; enable model generation
@@ -412,7 +437,8 @@ for(var i = 0; i < examples.length; i++) {
    integers and reals. 
    The command <b>declare-const</b> is used to declare integer and real constants.
    </p>
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/jw?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/jw?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (declare-const a Int)
    (declare-const b Int)
    (declare-const c Int)
@@ -667,7 +693,6 @@ for(var i = 0; i < examples.length; i++) {
    <code id="ex20_result" ></code>
 
 
-   </pre>
    
    <p>
    We can prove a bitwise version of deMorgan's law:
@@ -816,7 +841,8 @@ for(var i = 0; i < examples.length; i++) {
    The following example defines a constant array containing only ones.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/Ii?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/Ii?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (declare-const all1 (Array Int Int))
    (declare-const a Int)
    (declare-const i Int)
@@ -849,7 +875,8 @@ for(var i = 0; i < examples.length; i++) {
    The following example illustrates how to use the <tt>map</tt> function.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/slc?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/slc?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (define-sort Set (T) (Array T Bool))
    (declare-const a (Set Int))
    (declare-const b (Set Int))
@@ -884,7 +911,8 @@ for(var i = 0; i < examples.length; i++) {
    to specify the full signature of <tt>+</tt> since it is an overloaded operator.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/rN?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/rN?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (define-sort A () (Array Int Int Int))
    (define-fun bag-union ((x A) (y A)) A
      ((_ map (+ (Int Int) Int)) x y))
@@ -921,7 +949,8 @@ for(var i = 0; i < examples.length; i++) {
    It introduces the parametric type <tt>Pair</tt>, with constructor <tt>mk-pair</tt>
    and two arguments that can be accessed using the selector functions <tt>first</tt> and <tt>second</tt>.
    </p>
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/LA?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/LA?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (declare-datatypes (T1 T2) ((Pair (mk-pair (first T1) (second T2)))))
    (declare-const p1 (Pair Int Int))
    (declare-const p2 (Pair Int Int))
@@ -941,7 +970,8 @@ for(var i = 0; i < examples.length; i++) {
    of sort <tt>S</tt> to be distinct, but not for four constants.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/IA?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/IA?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (declare-datatypes () ((S A B C)))
    (declare-const x S)
    (declare-const y S)
@@ -961,7 +991,8 @@ for(var i = 0; i < examples.length; i++) {
    can be specified in Z3 as:
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/775?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/775?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (declare-datatypes (T) ((Lst nil (cons (hd T) (tl Lst)))))
    (declare-const l1 (Lst Int))
    (declare-const l2 (Lst Bool))
@@ -972,7 +1003,8 @@ for(var i = 0; i < examples.length; i++) {
    The accessors <tt>head</tt> and <tt>tail</tt> are defined as usual.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/p?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/p?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (declare-const l1 (List Int))
    (declare-const l2 (List Int))
    (declare-const l3 (List Int))
@@ -1003,7 +1035,8 @@ for(var i = 0; i < examples.length; i++) {
    We list one example below.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/eV?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/eV?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    ; declare a mutually recursive parametric datatype
    (declare-datatypes (T) ((Tree leaf (node (value T) (children TreeList)))
                            (TreeList nil (cons (car Tree) (cdr TreeList)))))
@@ -1037,7 +1070,8 @@ for(var i = 0; i < examples.length; i++) {
    the universally quantified implication. 
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/dRWWo?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/dRWWo?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (set-option :timeout 2000)
    (declare-datatypes () ((Nat zero (succ (pred Nat)))))
    (declare-fun p (Nat) Bool)
@@ -1093,7 +1127,8 @@ for(var i = 0; i < examples.length; i++) {
    should be monotone. 
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/pl?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/pl?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (declare-sort Type)
    (declare-fun subtype (Type Type) Bool)
    (declare-fun array-of (Type) Type)
@@ -1142,7 +1177,8 @@ for(var i = 0; i < examples.length; i++) {
    the formula is unsatisfiable.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/K?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/K?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (set-option :smt.auto-config false) ; disable automatic self configuration
    (set-option :smt.mbqi false) ; disable model-based quantifier instantiation
    (declare-fun f (Int) Int)
@@ -1164,7 +1200,8 @@ for(var i = 0; i < examples.length; i++) {
    they may also make Z3 "less complete". 
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/2DWu?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/2DWu?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (set-option :smt.auto-config false) ; disable automatic self configuration
    (set-option :smt.mbqi false) ; disable model-based quantifier instantiation
    (declare-fun f (Int) Int)
@@ -1215,7 +1252,8 @@ for(var i = 0; i < examples.length; i++) {
    For example, if we have the following equalities:
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/pO?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/pO?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (set-option :smt.auto-config false) ; disable automatic self configuration
    (set-option :smt.mbqi false) ; disable model-based quantifier instantiation
    (declare-fun f (Int) Int)
@@ -1254,7 +1292,8 @@ for(var i = 0; i < examples.length; i++) {
    This quantified formula is annotated with the multi-pattern <tt>(f x) (f y)</tt>
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/5bH?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/5bH?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (declare-sort A)
    (declare-sort B)
    (declare-fun f (A) B)
@@ -1278,7 +1317,8 @@ for(var i = 0; i < examples.length; i++) {
    it has a partial inverse. 
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/F?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/F?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (declare-sort A)
    (declare-sort B)
    (declare-fun f (A) B)
@@ -1317,7 +1357,8 @@ for(var i = 0; i < examples.length; i++) {
    returned model does indeed satisfy the quantifier.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/YS?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/YS?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (set-option :smt.mbqi true)
    (declare-fun f (Int Int) Int)
    (declare-const a Int)
@@ -1365,7 +1406,8 @@ for(var i = 0; i < examples.length; i++) {
    generated model. In this example, Z3 also creates a finite interpretation for the uninterpreted sort <tt>T</tt>.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/cF02?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/cF02?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    ; click on edit to see the example
    </pre>
    
@@ -1386,7 +1428,8 @@ for(var i = 0; i < examples.length; i++) {
    between sets as formula equivalence. 
    <p/>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/YR?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/YR?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    ; click on edit to see the example
    </pre>
    
@@ -1411,7 +1454,8 @@ for(var i = 0; i < examples.length; i++) {
    found in the paper <a href="https://web.archive.org/web/20210125011020/http://academic.research.microsoft.com/Paper/1843442.aspx" target="_blank">What's Decidable About Arrays?</a>.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/H?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/H?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    ; click on edit to see the example
    </pre>
    
@@ -1425,7 +1469,8 @@ for(var i = 0; i < examples.length; i++) {
    via Local Equality Axioms</a>.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/4Oplu?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/4Oplu?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    ; click on edit to see the example
    </pre>
    
@@ -1440,7 +1485,8 @@ for(var i = 0; i < examples.length; i++) {
    </a> The model based quantifier instantiation approach used in Z3 is also described in this paper.
    Stratified data-structures (such as arrays of pointers) can be encoded in this fragment. </p>
     
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/W?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/W?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    ; click on edit to see the example.
    </pre>
    
@@ -1448,7 +1494,8 @@ for(var i = 0; i < examples.length; i++) {
    Shifts on streams (or arrays) can also be encoded.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/5Lb?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/5Lb?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (set-option :smt.mbqi true)
    ;; f an g are "streams"
    (declare-fun f (Int) Int)
@@ -1487,7 +1534,8 @@ for(var i = 0; i < examples.length; i++) {
    Efficiently Solving Quantified Bit-Vector Formulas</a>.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/4TZ7?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/4TZ7?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (set-option :smt.mbqi true)
    (define-sort Char () (_ BitVec 8))
    
@@ -1509,7 +1557,8 @@ for(var i = 0; i < examples.length; i++) {
    In the following example, the first three quantifiers are defining <tt>f</tt> by cases.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/G5?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/G5?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    (set-option :smt.mbqi true)
    (declare-fun f (Int) Int)
    (declare-fun p (Int) Bool)
@@ -1539,7 +1588,8 @@ for(var i = 0; i < examples.length; i++) {
    The following simple example is not in the fragments described above.
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/v?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/v?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    ; click on edit to see the example.
    </pre>
    
@@ -1548,7 +1598,8 @@ for(var i = 0; i < examples.length; i++) {
    finder. In the following example, <tt>:macro-finder</tt> will expand quantifiers representing macros
    at preprocessing time.</p> 
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/yl?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/yl?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    ; click on edit to see the example.
    </pre>
    
@@ -1569,7 +1620,8 @@ for(var i = 0; i < examples.length; i++) {
    The following challenge problem from the paper <a href="https://web.archive.org/web/20210125011020/http://academic.research.microsoft.com/Paper/615910.aspx" target="_blank">
    SEM: a system for enumerating models</a> is proved to be unsatisfiable in less than one second by Z3.</p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/WH?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/WH?frame=1&amp;menu=0&amp;course=1">load in editor</a>
+   <pre class="listing">
    ; click on edit to see the example.
    </pre>
    
