@@ -12,11 +12,29 @@ layout: default
    }
 
    window.onload = function(){
-      var inputs = document.getElementsByTagName('textarea');
 
+
+var examples = document.getElementsByClassName("listinglink");
+/*
+for(var i = 0; i < examples.length; i++) {
+    var code = examples[i].nextSibling;
+    console.log(typeof(code))
+    console.log(JSON.stringify(code));
+    console.log(code.textContent)
+    console.log(examples[i])
+  var ta = document.createElement("textarea");
+  ta.style.width = "100%";
+  ta.innerText = code.textContent;
+  examples[i].parentNode.insertBefore(ta, examples[i]);
+  // document.body.insertBefore(ta, examples[i]);
+
+   }
+*/
+   var inputs = document.getElementsByTagName('textarea');
    for(var i = 0; i < inputs.length; i++) {
       inputs[i].rows = inputs[i].value.split(/\r\n|\r|\n/).length - 1
 }
+
    }
 </script>
 
@@ -71,7 +89,7 @@ layout: default
       (declare-const a Int)
       (declare-fun f (Int Bool) Int)
    </textarea><br/>
-   <button id="ex1" onClick="run_id('ex1_code','ex1_result')" >Solve</button> <br/>
+   <button onClick="run_id('ex1_code','ex1_result')" >Solve</button> <br/>
    <code id="ex1_result" ></code>
    <p>
    The command <b>assert</b>
@@ -246,18 +264,18 @@ layout: default
    The following example defines several abbreviations for sort expressions.
    </p>
    <textarea id="ex7_code" rows="20" style="width:100%">
-      (define-sort Set (T) (Array T Bool))
-      (define-sort IList () (List Int))
-      (define-sort List-Set (T) (Array (List T) Bool))
+      ;(define-sort Set (T) (Array T Bool))
+      ;(define-sort IList () (List Int))
+      ;(define-sort List-Set (T) (Array (List T) Bool))
       (define-sort I () Int)
       
       (declare-const s1 (Set I))
-      (declare-const s2 (List-Set Int))
+      ;(declare-const s2 (List-Set Int))
       (declare-const a I)
-      (declare-const l IList)
+      ;(declare-const l IList)
       
       (assert (= (select s1 a) true))
-      (assert (= (select s2 l) false))
+      ;(assert (= (select s2 l) false))
       (check-sat)
       (get-model)
    </textarea><br/>
@@ -498,7 +516,7 @@ layout: default
    Z3 also has support for <b>division</b>, integer division, modulo and remainder operators.
    Internally, they are all mapped to multiplication.  
    </p>
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/0Msl?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <textarea id="ex15_code" rows="3" style="width:100%">
    (declare-const a Int)
    (declare-const r1 Int)
    (declare-const r2 Int)
@@ -519,7 +537,10 @@ layout: default
    (assert (&gt;= c 20.0))
    (check-sat)
    (get-model)
-   </pre>
+   </textarea><br/>
+   <button id="ex15" onClick="run_id('ex15_code','ex15_result')" >Solve</button> <br/>
+   <code id="ex15_result" ></code>
+ 
    
    <p>
    In Z3, <b>division by zero</b> is allowed,
@@ -527,8 +548,7 @@ layout: default
    functions are total, although the result may be underspecified in some cases like division by
    zero.
    </p>
-   
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/ajKV?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <textarea id="ex16_code" rows="3" style="width:100%">
    (declare-const a Real)
    ; The following formula is satisfiable since division by zero is not specified.
    (assert (= (/ a 0.0) 10.0)) 
@@ -539,7 +559,10 @@ layout: default
    ; So, (/ a 0.0) cannot evaluated to 10.0 and 2.0.
    (assert (= (/ a 0.0) 2.0)) 
    (check-sat)
-   </pre>
+   </textarea><br/>
+   <button onClick="run_id('ex16_code','ex16_result')" >Solve</button> <br/>
+   <code id="ex16_result" ></code>
+
    
    <p>
     If you are not happy with this behavior, you may use <b>ite</b> (if-then-else) operator to guard
@@ -547,8 +570,7 @@ layout: default
    This example uses <b>define-fun</b> constructor to create a new operator: <b>mydiv</b>.
    This is essentially a macro, and Z3 will expand its definition for every application of <b>mydiv</b>. 
    </p>
-   
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/m?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <textarea id="ex17_code" rows="3" style="width:100%">
    ; defining my own division operator where x/0.0 == 0.0 for every x.
    (define-fun mydiv ((x Real) (y Real)) Real
      (if (not (= y 0.0))
@@ -559,7 +581,10 @@ layout: default
    (assert (&gt;= (mydiv a b) 1.0))
    (assert (= b 0.0))
    (check-sat)
-   </pre>
+   </textarea><br/>
+   <button onClick="run_id('ex17_code','ex17_result')" >Solve</button> <br/>
+   <code id="ex17_result" ></code>
+
    
    <h2>Bitvectors</h2>
    
@@ -596,8 +621,7 @@ layout: default
    The command <tt>(set-option :pp.bv-literals false)</tt> can be used to force Z3 to display bitvector literals in
    decimal format.
    </p>
-   
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/8dj7?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <textarea id="ex18_code" rows="3" style="width:100%">
    (display #b0100)
    (display (_ bv20 8))
    (display (_ bv20 7))
@@ -607,11 +631,13 @@ layout: default
    (display (_ bv20 8))
    (display (_ bv20 7))
    (display #x0a) 
-   </pre>
+   </textarea><br/>
+   <button onClick="run_id('ex18_code','ex18_result')" >Solve</button> <br/>
+   <code id="ex18_result" ></code>
+
    
    <h3>Basic Bitvector Arithmetic</h3>
-   
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/Y?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <textarea id="ex19_code" rows="3" style="width:100%">
    (simplify (bvadd #x07 #x03)) ; addition
    (simplify (bvsub #x07 #x03)) ; subtraction
    (simplify (bvneg #x07)) ; unary minus
@@ -622,29 +648,39 @@ layout: default
    (simplify (bvshl #x07 #x03)) ; shift left
    (simplify (bvlshr #xf0 #x03)) ; unsigned (logical) shift right
    (simplify (bvashr #xf0 #x03)) ; signed (arithmetical) shift right
-   </pre>
+   
+   </textarea><br/>
+   <button onClick="run_id('ex19_code','ex19_result')" >Solve</button> <br/>
+   <code id="ex19_result" ></code>
+</pre>
    
    <h3>Bitwise Operations</h3>
-   
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/6ehA?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing"> 
+   <textarea id="ex20_code" rows="3" style="width:100%">
    (simplify (bvor #x6 #x3))   ; bitwise or
    (simplify (bvand #x6 #x3))  ; bitwise and
    (simplify (bvnot #x6)) ; bitwise not
    (simplify (bvnand #x6 #x3)) ; bitwise nand
    (simplify (bvnor #x6 #x3)) ; bitwise nor
    (simplify (bvxnor #x6 #x3)) ; bitwise xnor
+   </textarea><br/>
+   <button onClick="run_id('ex20_code','ex20_result')" >Solve</button> <br/>
+   <code id="ex20_result" ></code>
+
+
    </pre>
    
    <p>
    We can prove a bitwise version of deMorgan's law:
    </p>
-   
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/x?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <textarea id="ex21_code" rows="3" style="width:100%">
    (declare-const x (_ BitVec 64))
    (declare-const y (_ BitVec 64))
    (assert (not (= (bvand (bvnot x) (bvnot y)) (bvnot (bvor x y)))))
    (check-sat)
-   </pre>
+   </textarea><br/>
+   <button onClick="run_id('ex21_code','ex21_result')" >Solve</button> <br/>
+   <code id="ex21_result" ></code>
+
    
    <p>
    Let us illustrate a simple property of bit-wise arithmetic.
@@ -653,9 +689,8 @@ layout: default
    zero if and only if <tt>x &amp; (x - 1)</tt> is zero, where <tt>&amp;</tt> represents the bitwise and.
    We check this for four bits below.
    </p>
-   
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/G?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
-   (define-fun is-power-of-two ((x (_ BitVec 4))) Bool 
+   <textarea id="ex22_code" rows="3" style="width:100%">
+      (define-fun is-power-of-two ((x (_ BitVec 4))) Bool 
      (= #x0 (bvand x (bvsub x #x1))))
    (declare-const a (_ BitVec 4))
    (assert 
@@ -666,11 +701,12 @@ layout: default
                 (= a #x4) 
                 (= a #x8)))))
    (check-sat)
-   </pre>
+   </textarea><br/>
+   <button onClick="run_id('ex22_code','ex22_result')" >Solve</button> <br/>
+   <code id="ex22_result" ></code>
    
    <h3>Predicates over Bitvectors</h3>
-   
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/r?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <textarea id="ex23_code" rows="3" style="width:100%">
    (simplify (bvule #x0a #xf0))  ; unsigned less or equal
    (simplify (bvult #x0a #xf0))  ; unsigned less than
    (simplify (bvuge #x0a #xf0))  ; unsigned greater or equal
@@ -679,19 +715,24 @@ layout: default
    (simplify (bvslt #x0a #xf0))  ; signed less than
    (simplify (bvsge #x0a #xf0))  ; signed greater or equal
    (simplify (bvsgt #x0a #xf0))  ; signed greater than
-   </pre>
+   </textarea><br/>
+   <button onClick="run_id('ex23_code','ex23_result')" >Solve</button> <br/>
+   <code id="ex23_result" ></code>
    
    <p>Signed comparison, such as <tt>bvsle</tt>, takes the sign bit of bitvectors into account for comparison,
    while unsigned comparison treats the bitvector as unsigned (treats the bitvector as a natural number).
    </p>
    
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/sl?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <textarea id="ex24_code" rows="3" style="width:100%">
    (declare-const a (_ BitVec 4))
    (declare-const b (_ BitVec 4))
    (assert (not (= (bvule a b) (bvsle a b))))
    (check-sat)
    (get-model)
-   </pre>
+   </textarea><br/>
+   <button onClick="run_id('ex24_code','ex24_result')" >Solve</button> <br/>
+   <code id="ex24_result" ></code>
+
    
    <h2>Arrays</h2>
    
@@ -729,8 +770,7 @@ layout: default
    and when <tt>x = y</tt> (because the first equality forced the range of <tt>x</tt> to be <tt>x</tt>).
    We can check this constraint.
    </p>
-   
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/iO?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <textarea id="ex25_code" rows="3" style="width:100%">
    (declare-const x Int)
    (declare-const y Int)
    (declare-const z Int)
@@ -741,13 +781,15 @@ layout: default
    (assert (= (store a1 x y) a1))
    (check-sat)
    (get-model)
-   </pre>
+   </textarea><br/>
+   <button onClick="run_id('ex25_code','ex25_result')" >Solve</button> <br/>
+   <code id="ex25_result" ></code>
+
    
    <p>On the other hand, the constraints become unsatisfiable when asserting
    <tt>(not (= x y))</tt>.
    </p>
-   
-   <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/9oKM?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
+   <textarea id="ex26_code" rows="3" style="width:100%">
    (declare-const x Int)
    (declare-const y Int)
    (declare-const z Int)
@@ -758,7 +800,10 @@ layout: default
    (assert (= (store a1 x y) a1))
    (assert (not (= x y)))
    (check-sat)
-   </pre>
+   </textarea><br/>
+   <button onClick="run_id('ex26_code','ex26_result')" >Solve</button> <br/>
+   <code id="ex22_result" ></code>
+
    
    <h3>Constant Arrays</h3>
    
