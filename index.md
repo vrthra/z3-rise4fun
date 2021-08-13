@@ -10,18 +10,15 @@ layout: default
       const result = document.getElementById(result_id);
       result.innerText = Z3.solve(code.value)
    }
+
+   window.onload = function(){
+      var inputs = document.getElementsByTagName('textarea');
+
+   for(var i = 0; i < inputs.length; i++) {
+      inputs[i].rows = inputs[i].value.split(/\r\n|\r|\n/).length - 1
+}
+   }
 </script>
-
-
-
-
-<textarea id="ex0_code" rows="20" style="width:100%">
-   (check-sat)
-</textarea><br/>
-<button onClick="run_id('ex0_code','ex0_result')" >Solve</button> <br/>
-<code id="ex0_result" ></code>
-
-
 
 <p style="clear:both;">Be sure to follow along with the examples by clicking the "edit" link in the
    corner. See what the tool says, try your own formulas, and experiment!</p>
