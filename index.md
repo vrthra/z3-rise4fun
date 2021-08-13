@@ -3,7 +3,7 @@ title: "Getting Started with Z3: A Guide"
 layout: default
 ---
 
-<script src="z3-wasm/out/z3.js" ></script>
+<script src="out/z3.js" ></script>
 <script>
    function run_id(code_id,result_id){
       const code = document.getElementById(code_id);
