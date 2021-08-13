@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with Z3: A Guide"
+layout: default
 ---
 
 <script src="/out/z3.js" ></script>
