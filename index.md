@@ -2,8 +2,10 @@
 title: "Getting Started with Z3: A Guide"
 layout: default
 ---
-
-<script src="out/z3.js" ></script>
+<head>
+<meta http-equiv="origin-trial" content="ArEqQWVa0gX1PypFisPjQNUFa3JBwHQX25BLj5zs4LViQPYXy1lLw1LFtS8mMQfMK/1CHz9goGmleDUhGugL6AsAAAB+eyJvcmlnaW4iOiJodHRwczovL3d3dy5waGlsaXB6dWNrZXIuY29tOjQ0MyIsImZlYXR1cmUiOiJVbnJlc3RyaWN0ZWRTaGFyZWRBcnJheUJ1ZmZlciIsImV4cGlyeSI6MTYzOTUyNjM5OSwiaXNTdWJkb21haW4iOnRydWV9">
+</head>
+<script src="out/z3.js" crossorigin></script>
 <script>
    function run_id(code_id,result_id){
       const code = document.getElementById(code_id);
@@ -623,8 +625,8 @@ for (let code of examples) {
    signed two-complements arithmetic. There are a large number 
    of supported functions and relations
    over bit-vectors. They are summarized on Z3's 
-   <a href="https://web.archive.org/web/20210125011020/http://research.microsoft.com/projects/z3/documentation.html" target="_blank">on-line documentation</a>
-   of the binary APIs and they are summarized on the <a href="https://web.archive.org/web/20210125011020/http://www.smtlib.org/" target="_blank">SMT-LIB</a> web-site.
+   <a href="http://research.microsoft.com/projects/z3/documentation.html" target="_blank">on-line documentation</a>
+   of the binary APIs and they are summarized on the <a href="http://www.smtlib.org/" target="_blank">SMT-LIB</a> web-site.
    We will not try to give a comprehensive overview here, 
    but touch on some of the main features.
    </p>
@@ -783,7 +785,7 @@ for (let code of examples) {
    with an NP-complete satisfiability complexity).
    We describe these extensions in the following using a collection of examples.
    Additional background on these extensions is available in the 
-   paper <a href="https://web.archive.org/web/20210125011020/http://research.microsoft.com/en-us/um/people/leonardo/fmcad09.pdf" target="_blank">Generalized and Efficient Array Decision Procedures</a>.
+   paper <a href="http://research.microsoft.com/en-us/um/people/leonardo/fmcad09.pdf" target="_blank">Generalized and Efficient Array Decision Procedures</a>.
    </p>
    
    <h3>Select and Store</h3>
@@ -1451,7 +1453,7 @@ for (let code of examples) {
    
    <p>The <b>array property fragment</b> can encode properties about unidimensional, and is
    strong enough to say an array is sorted. More information about this fragment can be
-   found in the paper <a href="https://web.archive.org/web/20210125011020/http://academic.research.microsoft.com/Paper/1843442.aspx" target="_blank">What's Decidable About Arrays?</a>.
+   found in the paper <a href="http://academic.research.microsoft.com/Paper/1843442.aspx" target="_blank">What's Decidable About Arrays?</a>.
    </p>
    
    <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/H?frame=1&amp;menu=0&amp;course=1">load in editor</a>
@@ -1464,7 +1466,7 @@ for (let code of examples) {
    <p>The <b>list fragment</b> can encode properties about data-structures such as lists.
    For each quantified axiom <tt>q</tt> in this fragment, there is an "easy" way to satisfy <tt>q</tt>.
    More information about this fragment can be
-   found in the paper <a href="https://web.archive.org/web/20210125011020/http://www.cs.berkeley.edu/~necula/Papers/verifier-cav05.pdf" target="_blank">
+   found in the paper <a href="http://www.cs.berkeley.edu/~necula/Papers/verifier-cav05.pdf" target="_blank">
    Data Structure Specifications
    via Local Equality Axioms</a>.
    </p>
@@ -1479,7 +1481,7 @@ for (let code of examples) {
    <p>The essentially/almost uninterpreted fragment subsumes the previous fragments, and uses
    a more relaxed notion of stratification. 
    More information about this fragment can be
-   found in the paper <a href="https://web.archive.org/web/20210125011020/http://research.microsoft.com/en-us/um/people/leonardo/ci.pdf" target="_blank">
+   found in the paper <a href="http://research.microsoft.com/en-us/um/people/leonardo/ci.pdf" target="_blank">
    Complete instantiation for quantified formulas in
    Satisfiabiliby Modulo Theories.
    </a> The model based quantifier instantiation approach used in Z3 is also described in this paper.
@@ -1530,7 +1532,7 @@ for (let code of examples) {
    A distinguishing feature in QBVF is the support for uninterpreted
    function and predicate symbols. More information about this fragment
    can be found in the paper 
-   <a href="https://web.archive.org/web/20210125011020/http://research.microsoft.com/en-us/um/people/leonardo/fmcad10.pdf" target="_blank">
+   <a href="http://research.microsoft.com/en-us/um/people/leonardo/fmcad10.pdf" target="_blank">
    Efficiently Solving Quantified Bit-Vector Formulas</a>.
    </p>
    
@@ -1617,7 +1619,7 @@ for (let code of examples) {
    (set-option :smt.pull-nested-quantifiers true)
    </pre>
    <p> 
-   The following challenge problem from the paper <a href="https://web.archive.org/web/20210125011020/http://academic.research.microsoft.com/Paper/615910.aspx" target="_blank">
+   The following challenge problem from the paper <a href="http://academic.research.microsoft.com/Paper/615910.aspx" target="_blank">
    SEM: a system for enumerating models</a> is proved to be unsatisfiable in less than one second by Z3.</p>
    
    <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/WH?frame=1&amp;menu=0&amp;course=1">load in editor</a>
@@ -1631,7 +1633,7 @@ for (let code of examples) {
    Z3 is an efficient theorem prover used in many software testing, analysis and verification applications.
    In this tutorial, we covered its main capabilities using the textual interface.
    However, most applications use the Z3 programmatic 
-   <a href="https://web.archive.org/web/20210125011020/http://research.microsoft.com/en-us/um/redmond/projects/z3/documentation.html" target="_blank">API</a>
+   <a href="http://research.microsoft.com/en-us/um/redmond/projects/z3/documentation.html" target="_blank">API</a>
    to access these features.
    </p>
    
