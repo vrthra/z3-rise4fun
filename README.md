@@ -24,4 +24,16 @@ and do not work nicely on other distributions of Linux. Furthermore, its
 Z3 version is outdated, and numerous users have reported either compilation
 issues or issues while using the library.
 
+There are many Z3 in browser projects.
 
+- <https://github.com/cpitclaudel/z3.wasm>
+- <https://github.com/Z3Prover/z3/issues/1298>
+- <https://github.com/babelsberg/z3.js>
+- <https://github.com/sim642/z3em>
+- <https://github.com/mjyc/z3js>
+- <https://github.com/stahlbauer/z3.ts>
+
+
+Github discussion of rise4fun being down:
+
+- <https://github.com/Z3Prover/z3/discussions/5473>
