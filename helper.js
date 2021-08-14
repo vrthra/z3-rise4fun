@@ -7,6 +7,7 @@ function run_id(code_id, result_id) {
     }
 }
 
+Module.onRuntimeInitialized = () => {console.log("z3 loaded"); z3_loaded = true;}
 
 window.onload = function () {
 
