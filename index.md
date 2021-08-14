@@ -30,7 +30,7 @@ This is a reconstruction of the [rise4fun Z3](https://web.archive.org/web/202101
 </textarea>
 <button onclick="run_id('z3_input','z3_result')">Run</button>
 <br>
-<code id="z3_result"> </code>
+<code id="z3_result" style="white-space=pre-wrap"> </code>
 
 ## Resources
 You may also be interested in 
