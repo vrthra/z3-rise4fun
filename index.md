@@ -13,8 +13,8 @@ This is a reconstruction of the [rise4fun Z3](https://web.archive.org/web/202101
 ## Tutorials
 
 - [Guide](guide.html)
-- [Fixedpoints](fixedpoint.html)
-- [Optimization](optimization.html)
+- [Fixedpoints](fixedpoint.html) (Browser version is WIP)
+- [Optimization](optimization.html) (Browser version is WIP)
 - [Sequences](sequences.html)
 - [Strategies](strategies.html)
 
