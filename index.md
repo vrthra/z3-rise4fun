@@ -18,6 +18,7 @@ This is a reconstruction of the [rise4fun Z3](https://web.archive.org/web/202101
 - [Sequences](sequences.html)
 - [Strategies](strategies.html)
 
+
 <textarea id="z3_input" rows=20 style="width:100%">
 (declare-fun f (Int) Int)
 (declare-fun a () Int) ; a is a constant
@@ -35,5 +36,8 @@ This is a reconstruction of the [rise4fun Z3](https://web.archive.org/web/202101
 ## Resources
 You may also be interested in 
 
+- <https://github.com/philzook58/z3_tutorial> [(video)](https://www.youtube.com/watch?v=56IIrBZy9Rc&feature=youtu.be&ab_channel=BroadInstitute)
 - <https://theory.stanford.edu/~nikolaj/programmingz3.html>
-- <https://github.com/philzook58/z3_tutorial>
+- <https://ericpony.github.io/z3py-tutorial/guide-examples.htm>
+- <https://yurichev.com/writings/SAT_SMT_by_example.pdf>
+

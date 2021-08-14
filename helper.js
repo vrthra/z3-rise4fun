@@ -1,12 +1,16 @@
+var z3_loaded = false;
 function run_id(code_id, result_id) {
     const code = document.getElementById(code_id);
     const result = document.getElementById(result_id);
-    if(document.readyState == "complete"){
+    if(z3_loaded){
         result.innerText = Z3.solve(code.value)
     }
 }
 
+
 window.onload = function () {
+
+    Z3["onInitialized"] = () => {z3_loaded = true;}
 
     // Grab all pre elements and replace them with textarea button results combo
     var examples = document.getElementsByTagName("pre");
@@ -28,7 +32,7 @@ window.onload = function () {
             //code.parentNode.replaceChild(ta, code);
             button.innerText = "Run"
             button.onclick = () => {
-                if(document.readyState == "complete"){
+                if(z3_loaded){
                 try {
                     let res = Z3.solve(ta.value);
                     console.log(res)
