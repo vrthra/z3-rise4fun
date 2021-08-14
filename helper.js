@@ -11,28 +11,30 @@ window.onload = function () {
     console.log(examples)
     examples = Array.from(examples)
     for (let code of examples) {
-        let div = document.createElement("div");
+        if (code.className == "listing") {
+            let div = document.createElement("div");
 
-        let ta = document.createElement("textarea");
-        let result = document.createElement("code");
+            let ta = document.createElement("textarea");
+            let result = document.createElement("code");
 
-        let button = document.createElement("button");
-        let br = document.createElement("br");
+            let button = document.createElement("button");
+            let br = document.createElement("br");
 
-        ta.style.width = "100%";
-        ta.innerHTML = code.textContent.replace(/\r?\n/g, '\r\n');
-        //code.parentNode.replaceChild(ta, code);
-        button.innerText = "Solve"
-        button.onclick = () => {
-            let res = Z3.solve(ta.value);
-            console.log(res)
-            result.innerText = res;
+            ta.style.width = "100%";
+            ta.innerHTML = code.textContent.replace(/\r?\n/g, '\r\n');
+            //code.parentNode.replaceChild(ta, code);
+            button.innerText = "Solve"
+            button.onclick = () => {
+                let res = Z3.solve(ta.value);
+                console.log(res)
+                result.innerText = res;
+            }
+            div.appendChild(ta);
+            div.appendChild(button);
+            div.appendChild(br);
+            div.appendChild(result);
+            code.parentNode.replaceChild(div, code);
         }
-        div.appendChild(ta);
-        div.appendChild(button);
-        div.appendChild(br);
-        div.appendChild(result);
-        code.parentNode.replaceChild(div, code);
     }
 
     // destroy aref that do nothing now
@@ -49,7 +51,7 @@ window.onload = function () {
     // resize rows of all textarea to fits code 
     var inputs = document.getElementsByTagName('textarea');
     for (var i = 0; i < inputs.length; i++) {
-        inputs[i].rows = inputs[i].value.split(/\r\n|\r|\n/).length - 1
+        inputs[i].rows = Math.min(20, inputs[i].value.split(/\r\n|\r|\n/).length - 1);
     }
 
 }
