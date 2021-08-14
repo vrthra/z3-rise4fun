@@ -5,6 +5,7 @@ layout: default
 <head>
 <meta http-equiv="origin-trial" content="ArEqQWVa0gX1PypFisPjQNUFa3JBwHQX25BLj5zs4LViQPYXy1lLw1LFtS8mMQfMK/1CHz9goGmleDUhGugL6AsAAAB+eyJvcmlnaW4iOiJodHRwczovL3d3dy5waGlsaXB6dWNrZXIuY29tOjQ0MyIsImZlYXR1cmUiOiJVbnJlc3RyaWN0ZWRTaGFyZWRBcnJheUJ1ZmZlciIsImV4cGlyeSI6MTYzOTUyNjM5OSwiaXNTdWJkb21haW4iOnRydWV9">
 </head>
+<script src="coi-serviceworker.js"></script>
 <script src="out/z3.js" crossorigin></script>
 <script>
    function run_id(code_id,result_id){
