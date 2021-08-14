@@ -99,26 +99,26 @@ an interpretation that makes all formulas on the Z3 internal stack true.
 <p>
 The interpretation is provided using <b>definitions</b>. 
 For example, the definition: </p>
-<pre class="listing">
+<code>
 (define-fun a () Int [val])
-</pre>
+</code>
 <p>
 states that the value of <tt>a</tt> in the model is <tt>[val]</tt>.
 The definition: </p>
-<pre class="listing">
+<code>
 (define-fun f ((x!1 Int) (x!2 Bool)) Int
    ...
 )
-</pre>
+</code>
 <p>
 is very similar to a function definition used in programming languages.
 In this example, <tt>x1</tt> and <tt>x2</tt> are the arguments of the function interpretation
 created by Z3. For this simple example, the definition of <tt>f</tt> is based on
 <b>ite</b>'s (aka if-then-elses or conditional expressions). For example, the expression:
 </p>
-<pre class="listing">
+<code>
 (ite (and (= x!1 11) (= x!2 false)) 21 0)
-</pre>
+</code>
 <p>
 evaluates (returns) 21 when <tt>x!1</tt> is equal to 11, and <tt>x!2</tt> is equal to false.
 Otherwise, it returns 0.
@@ -216,9 +216,9 @@ are specified in the command and the sort expression uses the sort parameters. T
 command is this:
 </p>
 
-<pre class="listing">
+<code>
 (define-sort [symbol] ([symbol]+) [sort])
-</pre>
+</code>
 
 <p>
 The following example defines several abbreviations for sort expressions.
@@ -1342,9 +1342,9 @@ Note that it uses two auxiliary functions (<tt>subtype!25</tt> and <tt>k!24</tt>
 part of your formula. They are auxiliary definitions created by Z3 during the model construction procedure.
 We can also ask "questions" by using the <tt>eval</tt> command. For example,
 </p>
-<pre class="listing">
+<code>
 (eval (subtype int-type complex-type))
-</pre>
+</code>
 <p>
 executes (evaluates) the given expression using the produced functional program (model).
 </p>
@@ -1365,9 +1365,9 @@ many sorted first-order logic formulas. It corresponds to formulas which,
 when written in prenex normal form, 
 there is a function <tt>level</tt> from sorts to naturals,
 and for every function </p>
-<pre class="listing">
+<code>
 (declare-fun f (S_1 ... S_n) R)
-</pre>
+</code>
 <p>
 <tt>level(R) &lt; level(S_i)</tt>. 
 </p>

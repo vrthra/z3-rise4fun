@@ -23,7 +23,7 @@ window.onload = function () {
             ta.style.width = "100%";
             ta.innerHTML = code.textContent.replace(/\r?\n/g, '\r\n');
             //code.parentNode.replaceChild(ta, code);
-            button.innerText = "Solve"
+            button.innerText = "Run"
             button.onclick = () => {
                 let res = Z3.solve(ta.value);
                 console.log(res)
