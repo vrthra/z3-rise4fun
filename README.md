@@ -1,3 +1,25 @@
+# Z3 Rise4Fun
+
+Z3 tutorials from the rise4fun website.
+
+Known problems:
+- If you press run too early before everything loads, something gets broken
+- Non smtlib commands don't work. Probably because of the function we're using to call z3 being a stock smtlib function.
+- On main thread, so a tough Z3 query can make the tab unusable. I think there is a emscripten flag for this
+- I can't find copies of some of the smtlib commands that do not appear to be on the archive.org site.
+
+Notes: 
+- I made some edits to the build script in particular to include pthreads to make z3 work.
+- https://github.com/gzuidhof/coi-serviceworker was very helpful for fixing SharedBufferArray problems
+- I copy and pasted the source of the archive versions of rise4fun. I made some janky helper scripts in helper.js to traverse these pages and replace the old interactive pieces driven by `<a>` tags to ones that use `<textarea>` and `<buttons>`. I made some other small updates. Rise4fun was using a very old version of z3?
+- Github discussion of rise4fun being down: <https://github.com/Z3Prover/z3/discussions/5473>
+
+
+
+
+
+==========
+
 Z3 WASM
 =========
 
@@ -34,6 +56,3 @@ There are many Z3 in browser projects.
 - <https://github.com/stahlbauer/z3.ts>
 
 
-Github discussion of rise4fun being down:
-
-- <https://github.com/Z3Prover/z3/discussions/5473>
