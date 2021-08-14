@@ -31,6 +31,7 @@ window.onload = function () {
                     console.log(res)
                     result.innerText = res;
                 } catch (error) {
+                    console.error(error);
                     result.innerText = "Error. See Javascript console for more detail";
                 }
             }
