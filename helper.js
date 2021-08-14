@@ -1,7 +1,9 @@
 function run_id(code_id, result_id) {
     const code = document.getElementById(code_id);
     const result = document.getElementById(result_id);
-    result.innerText = Z3.solve(code.value)
+    if(document.readyState == "complete"){
+        result.innerText = Z3.solve(code.value)
+    }
 }
 
 window.onload = function () {
@@ -26,6 +28,7 @@ window.onload = function () {
             //code.parentNode.replaceChild(ta, code);
             button.innerText = "Run"
             button.onclick = () => {
+                if(document.readyState == "complete"){
                 try {
                     let res = Z3.solve(ta.value);
                     console.log(res)
@@ -34,6 +37,7 @@ window.onload = function () {
                     console.error(error);
                     result.innerText = "Error. See Javascript console for more detail";
                 }
+            }
             }
             div.appendChild(ta);
             div.appendChild(button);
