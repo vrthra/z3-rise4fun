@@ -16,6 +16,7 @@ window.onload = function () {
 
             let ta = document.createElement("textarea");
             let result = document.createElement("code");
+            result.style.whiteSpace = "pre-wrap";
 
             let button = document.createElement("button");
             let br = document.createElement("br");
@@ -25,9 +26,13 @@ window.onload = function () {
             //code.parentNode.replaceChild(ta, code);
             button.innerText = "Run"
             button.onclick = () => {
-                let res = Z3.solve(ta.value);
-                console.log(res)
-                result.innerText = res;
+                try {
+                    let res = Z3.solve(ta.value);
+                    console.log(res)
+                    result.innerText = res;
+                } catch (error) {
+                    result.innerText = "Error. See Javascript console for more detail";
+                }
             }
             div.appendChild(ta);
             div.appendChild(button);
