@@ -10,7 +10,7 @@ function run_id(code_id, result_id) {
 
 window.onload = function () {
 
-    Z3["onInitialized"] = () => {z3_loaded = true;}
+    Z3["onInitialized"] = () => {console.log("z3 loaded"); z3_loaded = true;}
 
     // Grab all pre elements and replace them with textarea button results combo
     var examples = document.getElementsByTagName("pre");
