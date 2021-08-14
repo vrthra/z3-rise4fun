@@ -2,16 +2,18 @@ var z3_loaded = false;
 function run_id(code_id, result_id) {
     const code = document.getElementById(code_id);
     const result = document.getElementById(result_id);
-    if(z3_loaded){
+    if (z3_loaded) {
         result.innerText = Z3.solve(code.value)
+    } else {
+        result.innerText = "Wait for Z3 to load and try again."
     }
 }
 
-Module.onRuntimeInitialized = () => {console.log("z3 loaded"); z3_loaded = true;}
+Module.onRuntimeInitialized = () => { console.log("z3 loaded"); z3_loaded = true; }
 
 window.onload = function () {
 
-    Z3["onInitialized"] = () => {console.log("z3 loaded"); z3_loaded = true;}
+    Z3["onInitialized"] = () => { console.log("z3 loaded"); z3_loaded = true; }
 
     // Grab all pre elements and replace them with textarea button results combo
     var examples = document.getElementsByTagName("pre");
@@ -33,16 +35,18 @@ window.onload = function () {
             //code.parentNode.replaceChild(ta, code);
             button.innerText = "Run"
             button.onclick = () => {
-                if(z3_loaded){
-                try {
-                    let res = Z3.solve(ta.value);
-                    console.log(res)
-                    result.innerText = res;
-                } catch (error) {
-                    console.error(error);
-                    result.innerText = "Error. See Javascript console for more detail";
+                if (z3_loaded) {
+                    try {
+                        let res = Z3.solve(ta.value);
+                        console.log(res)
+                        result.innerText = res;
+                    } catch (error) {
+                        console.error(error);
+                        result.innerText = "Error. See Javascript console for more detail";
+                    }
+                } else {
+                    result.innerText = "Wait for Z3 to load and try again."
                 }
-            }
             }
             div.appendChild(ta);
             div.appendChild(button);

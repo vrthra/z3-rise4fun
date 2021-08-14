@@ -3,7 +3,6 @@
 Z3 tutorials from the rise4fun website.
 
 Known problems:
-- If you press run too early before everything loads, something gets broken
 - Non smtlib commands don't work. Probably because of the function we're using to call z3 being a stock smtlib function.
 - On main thread, so a tough Z3 query can make the tab unusable. I think there is a emscripten flag for this
 - I can't find copies of some of the smtlib commands that do not appear to be on the archive.org site.
