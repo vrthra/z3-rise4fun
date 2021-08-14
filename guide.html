@@ -170,14 +170,14 @@ configuration options can be set.
 
 <a class="listinglink" target="default" href="/web/20210125011020/https://www.rise4fun.com/Z3/0nSM?frame=1&amp;menu=0&amp;course=1">load in editor</a><pre class="listing">
 (set-option :print-success true) 
-(set-option :produce-unsat-cores true) ; enable generation of unsat cores
+(set-option :unsat_core true) ; enable generation of unsat cores
 (set-option :produce-models true) ; enable model generation
-(set-option :produce-proofs true) ; enable proof generation
+(set-option :proof true) ; enable proof generation
 (declare-const x Int)
-(set-option :produce-proofs false) ; error, cannot change this option after a declaration or assertion
+(set-option :proof false) ; error, cannot change this option after a declaration or assertion
 (echo "before reset")
 (reset)
-(set-option :produce-proofs false) ; ok
+(set-option :proof false) ; ok
 </pre>
 
 <p>

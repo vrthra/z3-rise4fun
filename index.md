@@ -18,7 +18,22 @@ This is a reconstruction of the [rise4fun Z3](https://web.archive.org/web/202101
 - [Sequences](sequences.html)
 - [Strategies](strategies.html)
 
-<textarea id="z3_input" rows=20 width="100%"> </textarea>
+<textarea id="z3_input" rows=20 style="width:100%">
+(declare-fun f (Int) Int)
+(declare-fun a () Int) ; a is a constant
+(declare-const b Int) ; syntax sugar for (declare-fun b () Int)
+(assert (> a 20))
+(assert (> b a))
+(assert (= (f 10) 1))
+(check-sat)
+(get-model)
+</textarea>
 <button onclick="run_id('z3_input','z3_result')">Run</button>
 <br>
 <code id="z3_result"> </code>
+
+## Resources
+You may also be interested in 
+
+- <https://theory.stanford.edu/~nikolaj/programmingz3.html>
+- <https://github.com/philzook58/z3_tutorial>
