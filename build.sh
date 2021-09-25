@@ -18,6 +18,9 @@ function available() {
    fi
 }
 
+command -v nproc &> /dev/null || function nproc() {
+    sysctl -n hw.physicalcpu
+}    
 
 available emcc
 available emconfigure
