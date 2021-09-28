@@ -5,7 +5,7 @@ Z3 tutorials from the rise4fun website.
 Known problems:
 - Non smtlib commands don't work such as optimization or fixedpoint commands. Probably because of the function we're using to call z3 being a stock smtlib function.
 - On main thread, so a tough Z3 query can make the tab unusable. I think there is a emscripten flag for this
-- I can't find copies of some of the smtlib commands that do not appear to be on the archive.org site.
+- <strike>I can't find copies of some of the smtlib commands that do not appear to be on the archive.org site</strike> https://github.com/Z3Prover/doc/tree/master/riselive
 
 Notes: 
 - I made some edits to the build script in particular to include pthreads to make z3 work.
