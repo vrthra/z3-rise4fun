@@ -12,12 +12,15 @@ export ROOT=$PWD
 
 function available() {
    echo "Checking if $1 is available"
-   if ! [ -x $(command -v $1) ]; then
+   if ! [ -x "$(command -v $1)" ]; then
       echo "Error $1 is not installed" >&2
       exit 1
    fi
 }
 
+command -v nproc &> /dev/null || function nproc() {
+    sysctl -n hw.physicalcpu
+}    
 
 available emcc
 available emconfigure
