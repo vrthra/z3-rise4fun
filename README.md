@@ -5,7 +5,7 @@ Z3 tutorials from the rise4fun website.
 Known problems:
 - Non smtlib commands don't work such as optimization or fixedpoint commands. Probably because of the function we're using to call z3 being a stock smtlib function.
 - On main thread, so a tough Z3 query can make the tab unusable. I think there is a emscripten flag for this PROXY_TO_PTHREAD <https://emscripten.org/docs/porting/pthreads.html> 
-- Doesn't seem to load on my iPhone. Why?
+- <strike>Doesn't seem to load on my iPhone. Why? </strike>
 - <strike>I can't find copies of some of the smtlib commands that do not appear to be on the archive.org site</strike> https://github.com/Z3Prover/doc/tree/master/riselive
 
 Notes: 
@@ -13,15 +13,23 @@ Notes:
 - https://github.com/gzuidhof/coi-serviceworker was very helpful for fixing SharedBufferArray problems
 - I copy and pasted the source of the archive versions of rise4fun. I made some janky helper scripts in helper.js to traverse these pages and replace the old interactive pieces driven by `<a>` tags to ones that use `<textarea>` and `<buttons>`. I made some other small updates. Rise4fun was using a very old version of z3?
 - Github discussion of rise4fun being down: <https://github.com/Z3Prover/z3/discussions/5473>
-- iOS safari errors: ReferenceError: Can't find variable: Atomicsglobal code @ z3.js:646
+- <strike> iOS safari errors: ReferenceError: Can't find variable: Atomicsglobal code @ z3.js:646
   Apparently safari does not support Atomics which is what emscripten compiled to. I don't see how I'll fix this
-   helper.js:16 ReferenceError: Cannot access uninitialized variable.(anonymous function) @ helper.js:16
+   helper.js:16 ReferenceError: Cannot access uninitialized variable.(anonymous function) @ helper.js:16 </strike> Single threaded z3 build seems to fix this
 
 
 
 11/30/21
+- Now building using the cmake command here 
+<https://github.com/Z3Prover/z3/blob/master/.github/workflows/wasm.yml>
 
+- The C shim can be compiled with
+```
 emcc api/api.c z3/build/libz3.a -fexceptions -s EXPORTED_FUNCTIONS='["_init_context", "_destroy_context", "_eval_smt2"]' -s DISABLE_EXCEPTION_CATCHING=0 -s EXCEPTION_DEBUG=1 -s TOTAL_MEMORY=1GB -I z3/src/api/ --post-js api/api.js -o out/z3.js
+```
+- With the new single threaded build I turned pthreads off so all the coiworker nonsense can probably go too.
+- Perhaps also my guarding of calling z3 before it is done loading?
+
 
 ==========
 
