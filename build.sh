@@ -40,4 +40,6 @@ emmake make -j$(nproc)
 cd $ROOT
 
 export EM_CACHE=$HOME/.emscripten/
-emcc api/api.c $Z3_BASE_DIR/build/libz3.a -fexceptions -pthread -s EXPORTED_FUNCTIONS='["_init_context", "_destroy_context", "_eval_smt2"]' -s DISABLE_EXCEPTION_CATCHING=0 -s EXCEPTION_DEBUG=1 -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=4 -s TOTAL_MEMORY=1GB -I $Z3_BASE_DIR/src/api/ --post-js api/api.js -o out/z3.js
+emcc api/api.c $Z3_BASE_DIR/build/libz3.a -fexceptions -pthread -s EXPORTED_FUNCTIONS='["_init_context", "_destroy_context", "_eval_smt2"]' -s DISABLE_EXCEPTION_CATCHING=0 -s EXCEPTION_DEBUG=1 -s USE_PTHREADS=1 -s PTHREAD_POOL_SIZE=4 -s MODULARIZE=1 -s 'EXPORT_NAME="createZ3"'  -s TOTAL_MEMORY=1GB  -I $Z3_BASE_DIR/src/api/ --post-js api/api.js -o out/z3.js
+
+# -s EXIT_RUNTIME=1

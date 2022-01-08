@@ -31,3 +31,5 @@ const Z3 = {
       return ret.trim()
    }
 }
+
+Module['Z3'] = Z3;
